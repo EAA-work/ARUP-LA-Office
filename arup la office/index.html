@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A leaflet interactive map</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    <!-- Controls -->
+    <div class="controls">
+        <input type="text" class="search-box" id="search" placeholder="Search places, addresses...">
+        <button class="btn" id="layers-btn">🗂️ Layers</button>
+        <button class="btn" id="routing-btn">🧭 Routes</button>
+        <button class="btn" id="osm-btn">📍 Load OSM</button>
+    </div>
+
+    <!-- Layers Panel -->
+    <div class="panel layers-panel" id="layers-panel">
+        <h3>🗂️ Map Layers</h3>
+        
+        <div class="layer-group">
+            <label>Base Maps</label>
+            <div class="layer-item">
+                <input type="radio" name="baseMap" value="osm" checked> OpenStreetMap
+            </div>
+            <div class="layer-item">
+                <input type="radio" name="baseMap" value="hot"> OSM HOT
+            </div>
+            <div class="layer-item">
+                <input type="radio" name="baseMap" value="topo"> Topographic
+            </div>
+        </div>
+
+        <div class="layer-group">
+            <label>Data Layers</label>
+            <div class="toggle" data-layer="office">
+                <span>🏢 ARUP Office</span>
+                <div class="switch on"></div>
+            </div>
+            <div class="toggle" data-layer="osm">
+                <span>📍 OSM Places</span>
+                <div class="switch"></div>
+            </div>
+            <div class="toggle" data-layer="parking">
+                <span>🅿️ Parking Garages</span>
+                <div class="switch"></div>
+            </div>
+            <div class="toggle" data-layer="restaurants">
+                <span>🍽️ Restaurants</span>
+                <div class="switch"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Routing Panel -->
+    <div class="panel routing-panel" id="routing-panel">
+        <h3>🧭 Directions</h3>
+        <input type="text" class="input" id="start" placeholder="📍 From">
+        <input type="text" class="input" id="end" placeholder="🎯 To">
+        <button class="route-btn primary" onclick="getRoute()">Get Route</button>
+        <button class="route-btn secondary" onclick="clearRoute()">Clear Route</button>
+        <div class="route-info" id="route-info"></div>
+    </div>
+
+    <!-- Floating Controls -->
+    <div class="floating">
+        <button class="btn" id="location-btn" title="My Location">📍</button>
+        <button class="btn" id="office-btn" title="ARUP Office">🏢</button>
+    </div>
+
+    <!-- Status -->
+    <div class="status" id="status">Ready</div>
+
+    <!-- Map -->
+    <div id="map"></div>
+    <input type="file" id="osm-file" accept=".osm,.xml" style="display: none;">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.js"></script>
+    
+    <script src="js/script.js"></script>
+  </body>
+</html>
