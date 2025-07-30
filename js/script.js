@@ -31,6 +31,84 @@
             setupEventListeners();
         }
 
+
+        
+        // Create empty layer holders
+            let linesLayer, buildingsLayer, pointsLayer;
+
+            // Load lines (e.g. roads)
+            fetch('geojson/map_lines.geojson')
+            .then(response => response.json())
+            .then(data => {
+                linesLayer = L.geoJSON(data, {
+                style: { color: '#3388ff', weight: 2 }
+                }).addTo(map);
+            });
+
+            // Load buildings (multipolygons)
+            fetch('geojson/map_buildings.geojson')
+            .then(response => response.json())
+            .then(data => {
+                buildingsLayer = L.geoJSON(data, {
+                style: { color: '#ff7800', weight: 1 }
+                }).addTo(map);
+            });
+
+            // Load points (e.g. POIs)
+            fetch('geojson/map_points.geojson')
+            .then(response => response.json())
+            .then(data => {
+                    pointsLayer = L.geoJSON(data, {
+                    pointToLayer: (feature, latlng) => {
+                        return L.circleMarker(latlng, {
+                        radius: 5,
+                        fillColor: "#00cc99",
+                        color: "#006644",
+                        weight: 1,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: (feature, layer) => {
+                        if (feature.properties && feature.properties.name) {
+                        layer.bindPopup(feature.properties.name);
+                        }
+                    }
+                
+                }).addTo(map);
+            });
+
+
+
+
+            document.querySelectorAll('.toggle').forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const layerName = toggle.dataset.layer;
+                    toggle.classList.toggle('active');
+
+                    if (layerName === 'osm') {
+                    if (map.hasLayer(pointsLayer)) {
+                        map.removeLayer(pointsLayer);
+                    } else {
+                        map.addLayer(pointsLayer);
+                    }
+                    }
+
+                    if (layerName === 'buildings') {
+                    if (map.hasLayer(buildingsLayer)) {
+                        map.removeLayer(buildingsLayer);
+                    } else {
+                        map.addLayer(buildingsLayer);
+                    }
+                    }
+                });
+                });
+
+
+
+
+
+
         function addOfficeElements() {
             // Office marker
             officeMarker = L.marker([34.049948, -118.259959])
