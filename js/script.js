@@ -37,7 +37,7 @@
             let linesLayer, buildingsLayer, pointsLayer;
 
             // Load lines (e.g. roads)
-            fetch('geojson/map_lines.geojson')
+            fetch("https://raw.githubusercontent.com/EAA-work/ARUP-LA-Office/main/geojson/map_lines.geojson")
             .then(response => response.json())
             .then(data => {
                 linesLayer = L.geoJSON(data, {
@@ -46,7 +46,7 @@
             });
 
             // Load buildings (multipolygons)
-            fetch('geojson/map_buildings.geojson')
+            fetch("https://raw.githubusercontent.com/EAA-work/ARUP-LA-Office/main/geojson/map_buildings.geojson")
             .then(response => response.json())
             .then(data => {
                 buildingsLayer = L.geoJSON(data, {
@@ -55,7 +55,7 @@
             });
 
             // Load points (e.g. POIs)
-            fetch('geojson/map_points.geojson')
+            fetch("https://raw.githubusercontent.com/EAA-work/ARUP-LA-Office/main/geojson/map_points.geojson")
             .then(response => response.json())
             .then(data => {
                     pointsLayer = L.geoJSON(data, {
