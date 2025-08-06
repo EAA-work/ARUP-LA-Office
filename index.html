@@ -1,22 +1,19 @@
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A leaflet interactive map</title>
+    <title>ARUP LA Office - Interactive Map</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     <link rel="stylesheet" href="css/style.css">
-  </head>
+</head>
 
-  <body>
+<body>
     <!-- Controls -->
     <div class="controls">
-        <input type="text" class="search-box" id="search" placeholder="Search places, addresses...">
         <button class="btn" id="layers-btn">🗂️ Layers</button>
         <button class="btn" id="routing-btn">🧭 Routes</button>
-        <button class="btn" id="osm-btn">📍 Load OSM</button>
     </div>
 
     <!-- Layers Panel -->
@@ -37,23 +34,36 @@
         </div>
 
         <div class="layer-group">
-            <label>Data Layers</label>
+            <label>Office Data</label>
             <div class="toggle" data-layer="office">
                 <span>🏢 ARUP Office</span>
                 <div class="switch on"></div>
             </div>
-            <div class="toggle" data-layer="osm">
-                <span>📍 OSM Places</span>
+        </div>
+
+        <div class="layer-group">
+            <label>Layers</label>
+            <div class="toggle" data-layer="buildings">
+                <span>🏗️ Buildings</span>
                 <div class="switch"></div>
             </div>
-            <div class="toggle" data-layer="parking">
-                <span>🅿️ Parking Garages</span>
+            <div class="toggle" data-layer="lines">
+                <span>🛣️ Lines/Roads</span>
                 <div class="switch"></div>
             </div>
-            <div class="toggle" data-layer="restaurants">
-                <span>🍽️ Restaurants</span>
+            <div class="toggle" data-layer="points">
+                <span>📍 Points of Interest</span>
                 <div class="switch"></div>
             </div>
+            <div class="toggle" data-layer="traffic-signals">
+                <span>🚦 Traffic Signals</span>
+                <div class="switch"></div>
+            </div>
+        </div>
+
+        <div class="layer-group" id="dynamic-layers">
+            <label>Point Categories</label>
+            <!-- Dynamic layers will be added here -->
         </div>
     </div>
 
@@ -78,12 +88,9 @@
 
     <!-- Map -->
     <div id="map"></div>
-    <input type="file" id="osm-file" accept=".osm,.xml" style="display: none;">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-    
-    <script src="js/script.js"></script>
-  </body>
+    <script src = "js/script.js"></script>
+</body>
 </html>
